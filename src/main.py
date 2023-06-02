@@ -12,7 +12,8 @@ play_mode = PM(length)
 print(f"Okay! Get ready to play with {length} digits long codes!")
 print("1. User guessing mode.\n"
       "2. Computer guessing mode.\n"
-      "3. User-Computer mode.")
+      "3. User-Computer mode.\n"
+      "4. Computer teaching mode.")
 
 while True:
     mode = int(input("Pick a mode to play! "))
@@ -24,6 +25,9 @@ while True:
         break
     elif mode == 3:
         play_mode.computer_user_mode()
+        break
+    elif mode == 4:
+        play_mode.computer_teaching_simulation()
         break
     else:
         print("Invalid mode:( Try again.")

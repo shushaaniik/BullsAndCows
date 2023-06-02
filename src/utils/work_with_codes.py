@@ -1,9 +1,10 @@
 import itertools
 import random
 import re
+from typing import List
 
 
-def check_code(code: str, length: int):
+def check_code(code: str, length: int) -> bool:
     return not (len(code) != length or
                 not re.match("^[0-9]+$", code) or
                 len(set(code)) != len(code))
@@ -22,23 +23,32 @@ def get_bulls_cows(guess: str, code: str, length: int) -> (int, int):
     return bulls, cows
 
 
-def eliminate_impossible_codes(guess, possible_codes, bulls, cows, length):
-    new_possible_codes = []
+def is_valid_bulls_and_cows(bulls: int, cows: int, length: int) -> bool:
+    return not int(bulls) + int(cows) > length
+
+
+def are_valid_responses(possible_codes: List[str]) -> bool:
+    return len(possible_codes) != 0
+
+
+def eliminate_impossible_codes(guess: str, possible_codes: List[str],
+                               bulls: int, cows: int, length: int) -> List[str]:
+    new_possible_codes: List[str] = []
     for code in possible_codes:
         if get_bulls_cows(guess, code, length) == (bulls, cows):
             new_possible_codes.append(code)
     return new_possible_codes
 
 
-def generate_all_codes(length):
-    codes = []
+def generate_all_codes(length: int) -> List[str]:
+    codes: List[str] = []
     for code in itertools.product(range(10), repeat=length):
         if len(set(code)) == length:
             codes.append(''.join(str(d) for d in code))
     return codes
 
 
-def generate_random_code(length):
+def generate_random_code(length: int) -> str:
     digits = list(range(10))
     random_code = ''.join(str(d) for d in random.sample(digits, length))
     return random_code
