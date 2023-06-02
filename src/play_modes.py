@@ -1,5 +1,4 @@
-from typing import List
-from utils.work_with_codes import *
+from src.utils.play_modes_utils import *
 
 
 class PlayMode:
@@ -11,12 +10,13 @@ class PlayMode:
         attempts: int = 0
         while True:
             attempts += 1
-            response: str = input(f"Enter your guess #{attempts}: ")
+            response: str = get_guess(attempts)
             bulls, cows = get_bulls_cows(response, computer_code, self.__length)
-            if (bulls, cows) == (self.__length, 0):
+
+            if is_right_guess(bulls, cows, self.__length):
                 print(f"That's right! The code was {response}")
                 break
-            elif (bulls, cows) == (-1, -1):
+            elif is_invalid_guess(bulls, cows):
                 print(f"That's a bad guess! Try again")
                 attempts -= 1
                 continue
@@ -28,15 +28,14 @@ class PlayMode:
         guess: str = possible_codes[0]
         attempts: int = 1
         while True:
-            print(f"Guess #{attempts}: {guess}")
-            response: str = input("Enter the number of bulls and cows, separated by a space: ")
-            bulls, cows = response.split()
+            display_guess(attempts, guess)
+            bulls, cows = get_response_bulls_and_cows()
             if not is_valid_bulls_and_cows(bulls, cows, self.__length):
                 print("Impossible! Check again.")
                 continue
             possible_codes = eliminate_impossible_codes(guess, possible_codes,
                                                         int(bulls), int(cows), self.__length)
-            if len(possible_codes) == 1:
+            if is_the_only_possible_code(possible_codes):
                 print(f"The correct code is {possible_codes[0]}")
                 break
             if not are_valid_responses(possible_codes):
@@ -53,24 +52,23 @@ class PlayMode:
         while True:
             attempts += 1
             # computer
-            print(f"Computer's guess #{attempts}: {guess}")
-            response = input("Enter the number of bulls and cows, separated by a space: ")
-            bulls, cows = response.split()
+            display_computers_guess(attempts, guess)
+            bulls, cows = get_response_bulls_and_cows()
             possible_codes = eliminate_impossible_codes(guess, possible_codes,
                                                         int(bulls), int(cows), self.__length)
-            if len(possible_codes) == 1:
+            if is_the_only_possible_code(possible_codes):
                 print(f"The correct code is {possible_codes[0]}")
                 print("Computer wins!")
                 break
             guess = possible_codes[0]
 
             # user
-            user_guess = input(f"Enter your guess #{attempts}: ")
+            user_guess = get_guess(attempts)
             bulls, cows = get_bulls_cows(user_guess, computer_code, self.__length)
-            if (bulls, cows) == (self.__length, 0):
-                print(f"That's right! The code was {response}")
+            if is_right_guess(bulls, cows, self.__length):
+                print(f"That's right! The code was {user_guess}")
                 break
-            elif (bulls, cows) == (-1, -1):
+            elif is_invalid_guess(bulls, cows):
                 print(f"That's an invalid guess! Try again")
                 attempts -= 1
                 continue
@@ -82,15 +80,15 @@ class PlayMode:
         possible_codes: List[str] = generate_all_codes(self.__length)
         attempts = 1
         while True:
-            response: str = input(f"Enter your guess #{attempts}: ")
+            response: str = get_guess(attempts)
             bulls, cows = get_bulls_cows(response, computer_code, self.__length)
             if not are_valid_responses(possible_codes):
                 print(f"You've got mistake somewhere. Let's play again.")
                 break
-            if (bulls, cows) == (self.__length, 0):
+            if is_right_guess(bulls, cows, self.__length):
                 print(f"That's right! The code was {response}")
                 break
-            elif (bulls, cows) == (-1, -1):
+            elif is_invalid_guess(bulls, cows):
                 print(f"That's an invalid guess! Try again")
                 attempts -= 1
                 continue
