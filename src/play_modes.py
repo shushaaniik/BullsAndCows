@@ -1,4 +1,4 @@
-from src.utils.play_modes_utils import *
+from utils.play_modes_utils import *
 
 
 class PlayMode:

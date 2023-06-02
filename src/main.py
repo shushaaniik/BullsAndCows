@@ -1,8 +1,9 @@
 from play_modes import PlayMode as PM
+from utils.play_modes_utils import *
 
 while True:
     length = int(input("How long do you want your code to be? "))
-    if not (length < 1 or length > 10):
+    if is_valid_length(length):
         break
     else:
         print("Invalid length:( Try again.")
@@ -17,16 +18,16 @@ print("1. User guessing mode.\n"
 
 while True:
     mode = int(input("Pick a mode to play! "))
-    if mode == 1:
+    if is_user_guessing_mode(mode):
         play_mode.user_guessing_mode()
         break
-    elif mode == 2:
+    elif is_computer_guessing_mode(mode):
         play_mode.computer_guessing_mode()
         break
-    elif mode == 3:
+    elif is_computer_user_mode(mode):
         play_mode.computer_user_mode()
         break
-    elif mode == 4:
+    elif is_computer_teaching_simulation(mode):
         play_mode.computer_teaching_simulation()
         break
     else:

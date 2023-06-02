@@ -52,3 +52,7 @@ def generate_random_code(length: int) -> str:
     digits = list(range(10))
     random_code = ''.join(str(d) for d in random.sample(digits, length))
     return random_code
+
+
+def is_valid_length(length: int) -> bool:
+    return not (length < 1 or length > 10)

@@ -1,4 +1,4 @@
-from src.utils.work_with_codes import *
+from utils.work_with_codes import *
 
 
 def get_guess(attempts: int) -> str:
@@ -31,3 +31,19 @@ def get_response_bulls_and_cows() -> (int, int):
     if found_space == -1:
         print(f"Invalid bulls and cows!")
     return response.split()
+
+
+def is_user_guessing_mode(mode: int) -> bool:
+    return mode == 1
+
+
+def is_computer_guessing_mode(mode: int) -> bool:
+    return mode == 2
+
+
+def is_computer_user_mode(mode: int) -> bool:
+    return mode == 3
+
+
+def is_computer_teaching_simulation(mode: int) -> bool:
+    return mode == 4
