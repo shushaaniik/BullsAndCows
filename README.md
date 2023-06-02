@@ -27,7 +27,7 @@ My implementation allows you to play with secret codes of any length between 1 a
 ## Usage:
 
 ```
-git clone https://github.com/shushaaniik/Client-Server.git
+git clone https://github.com/shushaaniik/BullsAndCows.git
 cd BullsAndCows
 ./scripts/install_requirements.sh
 python3 src/main.py
