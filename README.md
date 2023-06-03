@@ -23,6 +23,23 @@ Bulls and Cows is a classic game where one player creates a secret code, and the
 My implementation allows you to play with secret codes of any length between 1 and 9 digits. Whether you prefer a quick and straightforward challenge or a complex mind-bending puzzle, you can customize the code length to match your desired level of difficulty.
 
 
+## Rules
+
+1. The code-maker generates a secret code consisting of a sequence of unique digits (e.g., "5372").
+
+2. The code-breaker makes guesses by providing sequences of digits, attempting to crack the secret code.
+
+3. After each guess, the code-maker provides feedback in the form of "bulls" and "cows".
+
+- A "bull" represents a correct digit in the correct position.
+
+- A "cow" represents a correct digit in the wrong position.
+
+4. The code-breaker uses the feedback to make informed guesses and narrows down the possible combinations.
+
+5. The guessing process continues until the code-breaker correctly guesses the secret code, or the maximum allowed attempts are reached.
+
+6. The code-maker wins if the code-breaker fails to guess the secret code within the given attempts.
 
 ## Usage:
 
