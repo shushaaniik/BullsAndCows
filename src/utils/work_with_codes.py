@@ -24,7 +24,7 @@ def get_bulls_cows(guess: str, code: str, length: int) -> (int, int):
 
 
 def is_valid_bulls_and_cows(bulls: int, cows: int, length: int) -> bool:
-    return not int(bulls) + int(cows) > length
+    return not bulls + cows > length
 
 
 def are_valid_responses(possible_codes: List[str]) -> bool:
@@ -33,19 +33,14 @@ def are_valid_responses(possible_codes: List[str]) -> bool:
 
 def eliminate_impossible_codes(guess: str, possible_codes: List[str],
                                bulls: int, cows: int, length: int) -> List[str]:
-    new_possible_codes: List[str] = []
-    for code in possible_codes:
-        if get_bulls_cows(guess, code, length) == (bulls, cows):
-            new_possible_codes.append(code)
-    return new_possible_codes
+    return [code for code in possible_codes
+            if get_bulls_cows(guess, code, length) == (bulls, cows)]
 
 
 def generate_all_codes(length: int) -> List[str]:
-    codes: List[str] = []
-    for code in itertools.product(range(10), repeat=length):
-        if len(set(code)) == length:
-            codes.append(''.join(str(d) for d in code))
-    return codes
+    return [''.join(str(d) for d in code)
+            for code in itertools.product(range(10), repeat=length)
+            if len(set(code)) == length]
 
 
 def generate_random_code(length: int) -> str:
